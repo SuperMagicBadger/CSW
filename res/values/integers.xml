@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="integer" name="tab_count">3</item>
+    <item name="socket_address" type="integer">12241</item>
+    
+</resources>

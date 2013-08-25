@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">City Sweep</string>
+    <string name="action_settings">Settings</string>
+    <string name="str_vadal">Vandalism</string>
+    <string name="str_graphitti">Graffiti</string>
+    <string name="str_pothole">Road Hazard</string>
+    <string name="str_custom">Custom</string>
+    <string name="str_server_adress">citysweep.deltacitylabs.com</string>
+    <string name="str_gunshots">Gunshots</string>
+    <string-array name="tab_titles">
+        <item >Report</item>
+        
+        <item >History</item>
+        <item >Settings</item>
+    </string-array>
+    <string name="history_file">historyfile</string>
+    <string name="str_disclaimer">This app is not a substitute for emergency services.  If you are involved in an emergency, please dial 911.</string>
+    <string name="str_dial">Dial 911</string>
+    <string name="str_privacy_message">Privacy policy is not available, this will be updated soon. We do not store any information which uniquely identifies your device.</string>
+    <string name="str_noise">Noise Disturbance</string>
+    <string name="str_about">Citysweep is an app gives organizations crowd-sourced city incident metrics by allowing users to geotag things which need attention. Reports can range from vandalism to potholes to fires, literally anything that needs attention from public services\n\n ©Delta City Labs 2012</string>
+    <string name="somethings_broken">Somethings Broken</string>
+    <string name="settingsheader">Settings</string>
+    <string name="str_networksettingsheader">Network Settings</string>
+
+</resources>
