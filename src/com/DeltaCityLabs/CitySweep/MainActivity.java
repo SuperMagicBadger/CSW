@@ -7,19 +7,10 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.FragmentTransaction;
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -34,54 +25,22 @@ import android.widget.EditText;
 
 import com.DeltaCityLabs.Fragments.ReportFragment;
 import com.DeltaCityLabs.Fragments.ReportListFragment;
-import com.DeltaCityLabs.Utilities.DataManager;
+import com.DeltaCityLabs.Utilities.ReportLoader;
+import com.DeltaCityLabs.Utilities.ReportManager;
 import com.example.idonteven.R;
-import com.google.analytics.tracking.android.GoogleAnalytics;
-import com.google.analytics.tracking.android.Tracker;
 
 //DONE discalimer for 911 with a link
 //DONE fix netwrok connection
 //DONE location instead of lon/lat
 //DONE privacy policy popup
 //TODO custom theme
-//TODO ui metrics
 //DONE unique identifier: epoc as user?
 
 //TODO clear history
 //TODO Research metrics available
 
 public class MainActivity extends FragmentActivity implements
-		ActionBar.TabListener, ReportFragment.reportListener {
-	// helper classes-----------------------------
-	private class connector implements ServiceConnection {
-		@Override
-		public void onServiceConnected(ComponentName cname, IBinder binding) {
-			datapipe = new Messenger(binding);
-			Log.d("Services", "Succesfully bound.");
-			
-			if(phoneType != null){
-				try {
-					Message m = new Message();
-					m.setData(phoneType.getBundle());
-					datapipe.send(m);
-				} catch (RemoteException e) {
-					e.printStackTrace();
-				} catch (NullPointerException e){
-					if(datapipe == null){
-						Log.e("Activity", "null dataipe");
-					}
-					Log.e("Activity", "null..." + e.getMessage());
-				}
-			}
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName cname) {
-			datapipe = null;
-			Log.d("Services", "Succesfully unbound.");
-		}
-
-	}
+		ActionBar.TabListener {
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -97,12 +56,8 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
 			switch (position) {
 			case 0:
-				rf.listener = act;
 				return rf;
 			case 1:
 				return hf;
@@ -137,22 +92,18 @@ public class MainActivity extends FragmentActivity implements
 	// fragments
 	private ReportFragment rf;
 	private ReportListFragment hf;
-	//data pipes
-	private Messenger datapipe;
-	private connector dc;
 	private AlertDialog.Builder bd;
-	//preferences
+	//statics
 	public static SharedPreferences cswPreferences;
 	public static SharedPreferences.Editor cswPEditor;
-	//tracking
-	public static Tracker tracker;
-	public static Data phoneType = null;
+	public static ReportManager reportManager; 
+	public static ReportLoader reportLoader;
 	// varblok====================================
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -165,11 +116,11 @@ public class MainActivity extends FragmentActivity implements
 		cswPEditor = cswPreferences.edit();
 		bd = new Builder(this);
 
-		// start services
-		dc = new connector();
-		startService(new Intent(this, DataManager.class));
-		bindService(new Intent(this, DataManager.class), dc,
-				BIND_NOT_FOREGROUND);
+		reportManager = new ReportManager();
+		reportManager.load(this);
+		
+		reportLoader = new ReportLoader();
+		reportLoader.loadFromPreferences(cswPreferences);
 		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
@@ -197,10 +148,6 @@ public class MainActivity extends FragmentActivity implements
 						actionBar.setSelectedNavigationItem(position);
 					}
 				});
-
-		//analytics
-		GoogleAnalytics.getInstance(this).setAppOptOut(!cswPreferences.getBoolean(key_sendmetrics, false));
-		tracker = GoogleAnalytics.getInstance(this).getTracker(getResources().getString(R.string.ga_trackingId));
 		
 		
 		// For each of the sections in the app, add a tab to the action bar.
@@ -226,11 +173,6 @@ public class MainActivity extends FragmentActivity implements
 			Log.i("Activity", "Its the first run, yo. And your epoc is... " + epoc);
 			Log.i("Activity", "initial setting of username to Generic User");
 			cswPEditor.commit();
-			//send phone type
-			phoneType = new Data();
-			phoneType.data.putString("phoneModel", Build.MODEL);
-			phoneType.data.putString("phoneManufacturer", Build.MANUFACTURER);
-			phoneType.data.putString("sdkLevel", Integer.toString(Build.VERSION.SDK_INT));
 		} else {
 			Log.i("Activity", "you already got an epoch:" + cswPreferences.getLong(key_userepoch, -1));
 		}
@@ -240,27 +182,11 @@ public class MainActivity extends FragmentActivity implements
 	
 	@Override
 	protected void onDestroy() {
-		hf.saveData();
-		unbindService(dc);
-		stopService(new Intent(this, DataManager.class));
-		tracker.close();
-		super.onStop();
+		reportManager.dump(this);
+		reportLoader.pushToPreferences(cswPreferences);
+		super.onDestroy();
 	}
-
-	@Override
-	public void onRecieveReport(Data d) {
-		if (datapipe != null) {
-			try {
-				Message m = new Message();
-				m.setData(d.getBundle());
-				datapipe.send(m);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-			hf.addReport(d);
-		}
-	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater i = getMenuInflater();
@@ -326,6 +252,9 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
+		if(tab.getPosition() == 1){
+			hf.refresh();
+		}
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
@@ -338,5 +267,4 @@ public class MainActivity extends FragmentActivity implements
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 	}
-
 }

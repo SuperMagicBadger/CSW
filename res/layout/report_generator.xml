@@ -12,69 +12,27 @@
     android:paddingTop="0dp"
     tools:context=".TabedActivity" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome to CitySweep!\nWhat would you like to report?" />
+
     <ScrollView
         android:id="@+id/history_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="325dp"
+        android:layout_height="0dp"
         android:layout_weight="0.59" >
 
         <LinearLayout
-            android:id="@+id/report_layout"
+            android:id="@+id/report_list"
             android:layout_width="match_parent"
             android:layout_height="254dp"
             android:divider="?android:dividerHorizontal"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:showDividers="beginning|middle|end" >
-
-            <Button
-                android:id="@+id/button_vandal"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:tag="@string/str_vadal"
-                android:text="@string/str_vadal" >
-
-                <requestFocus />
-            </Button>
-
-            <Button
-                android:id="@+id/button_graphitti"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:tag="@string/str_graphitti"
-                android:text="@string/str_graphitti" />
-
-            <Button
-                android:id="@+id/button_pothole"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:tag="@string/str_pothole"
-                android:text="@string/str_pothole" />
-
-            <Button
-                android:id="@+id/button_broken"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/somethings_broken" />
-
-            <Button
-                android:id="@+id/button_noise"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/str_noise" />
-
-            <Button
-                android:id="@+id/button_gunshots"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:tag="@string/str_gunshots"
-                android:text="@string/str_gunshots" />
 
             <EditText
                 android:id="@+id/button_custom"

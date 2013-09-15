@@ -24,5 +24,6 @@
     <string name="somethings_broken">Somethings Broken</string>
     <string name="settingsheader">Settings</string>
     <string name="str_networksettingsheader">Network Settings</string>
+    <string name="welcome_to_citysweep">Welcome to CitySweep!\\nWhat would you like to report?</string>
 
 </resources>
