@@ -9,6 +9,7 @@ import android.app.AlertDialog.Builder;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,10 +24,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.DeltaCityLabs.Fragments.NetworkFragment;
 import com.DeltaCityLabs.Fragments.ReportFragment;
 import com.DeltaCityLabs.Fragments.ReportListFragment;
-import com.DeltaCityLabs.Utilities.ReportLoader;
-import com.DeltaCityLabs.Utilities.ReportManager;
 import com.example.idonteven.R;
 
 //DONE discalimer for 911 with a link
@@ -93,11 +93,12 @@ public class MainActivity extends FragmentActivity implements
 	private ReportFragment rf;
 	private ReportListFragment hf;
 	private AlertDialog.Builder bd;
+	//services
+	private Intent networkServiceIntent;
 	//statics
 	public static SharedPreferences cswPreferences;
 	public static SharedPreferences.Editor cswPEditor;
-	public static ReportManager reportManager; 
-	public static ReportLoader reportLoader;
+	public static NetworkFragment networkFragmnet;
 	// varblok====================================
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -115,12 +116,18 @@ public class MainActivity extends FragmentActivity implements
 		cswPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		cswPEditor = cswPreferences.edit();
 		bd = new Builder(this);
-
-		reportManager = new ReportManager();
-		reportManager.load(this);
+		networkServiceIntent = new Intent(this, NetworkService.class);
 		
-		reportLoader = new ReportLoader();
-		reportLoader.loadFromPreferences(cswPreferences);
+		//start services
+		startService(networkServiceIntent);
+		
+		//get net fragment
+		android.app.FragmentManager fman= getFragmentManager();
+		networkFragmnet = (NetworkFragment) fman.findFragmentByTag(NetworkFragment.tag);
+		if(networkFragmnet == null){
+			networkFragmnet = new NetworkFragment();
+			fman.beginTransaction().add(networkFragmnet, NetworkFragment.tag).commit();
+		}
 		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
@@ -152,16 +159,10 @@ public class MainActivity extends FragmentActivity implements
 		
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
 			actionBar.addTab(actionBar.newTab()
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
-		
-		
 		
 		//manage initial preferences
 		if(cswPreferences.getBoolean(key_firstrun, true)){
@@ -176,15 +177,18 @@ public class MainActivity extends FragmentActivity implements
 		} else {
 			Log.i("Activity", "you already got an epoch:" + cswPreferences.getLong(key_userepoch, -1));
 		}
-		
-		
 	}
 	
 	@Override
-	protected void onDestroy() {
-		reportManager.dump(this);
-		reportLoader.pushToPreferences(cswPreferences);
-		super.onDestroy();
+	protected void onStart() {
+		super.onStart();
+		networkFragmnet.doBindService();
+	}
+	
+	@Override
+	protected void onStop() {
+		networkFragmnet.doReleaseService();
+		super.onStop();
 	}
 	
 	@Override

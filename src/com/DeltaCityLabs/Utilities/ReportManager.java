@@ -31,7 +31,7 @@ public class ReportManager {
 	
 	// report------------------------------------
 	public void newReport(Report d){
-		Log.i("ReportManager", "adding repport with " + d.size() + " keys");
+		Log.i("ReportManager", "adding repport: " + d.toString());
 		historyData.add(d);
 		waitingData.add(d);
 	}

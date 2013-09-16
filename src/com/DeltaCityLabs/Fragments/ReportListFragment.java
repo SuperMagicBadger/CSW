@@ -29,20 +29,21 @@ public class ReportListFragment extends Fragment {
 		public TextView rep, loc, time;
 		public ReportListItem(Report r){
 			//vars
-			String temps;
+			String tempS;
+			Float tempFone, tempFtwo;
 			report = r;
 			
 			//set rep
-			Log.i("ReportLister", "report is " + report == null ? "null " : "not null " +
-			"and is of size: " + report.size());
-			temps = report.getString(Report.key_tagtype);
+			tempS = report.getString(Report.key_tagtype);
 			rep = new TextView(getActivity());
-			rep.setText(temps);
+			rep.setText(tempS);
 			rep.setTextSize(20);
 			
 			//set loc
+			tempFone = report.getFloat(Report.key_lat);
+			tempFtwo = report.getFloat(Report.key_lon);
 			loc = new TextView(getActivity());
-			loc.setText("\tlat: " + "fgs" + "  lon: " + "fds");
+			loc.setText("\tlat: " + tempFone + "  lon: " + tempFtwo);
 			loc.setTextSize(10);
 			
 			//set time
@@ -68,9 +69,12 @@ public class ReportListFragment extends Fragment {
 	// helpers===================================
 	
 	// constructors------------------------------
-	public ReportListFragment(){
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		oldData = new ArrayList<ReportListFragment.ReportListItem>();
 	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		//load view
@@ -102,7 +106,7 @@ public class ReportListFragment extends Fragment {
 		Log.i("ReportLister", "refresh!");
 		clearData();
 		
-		for(Report r : MainActivity.reportManager.historyData){
+		for(Report r : MainActivity.networkFragmnet.manager.historyData){
 			addReport(r);
 		}
 	}

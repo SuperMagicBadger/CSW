@@ -43,7 +43,7 @@ public class ReportFragment extends Fragment {
 		public void onClick(DialogInterface dialog, int which) {
 			if(trackedReport != null){
 				Log.d("Report", "Adding selected report to transmiter");
-				MainActivity.reportManager.newReport(trackedReport);
+				MainActivity.networkFragmnet.newReport(trackedReport);
 			}
 		}
 
@@ -66,8 +66,7 @@ public class ReportFragment extends Fragment {
 		@Override
 		public void onClick(View v) {
 			trackedReport = generateReport(internalTag);
-			
-			
+
 			//set user data
 			if(MainActivity.cswPreferences.getBoolean(MainActivity.key_sendmetrics, false)){
 			}
@@ -78,9 +77,7 @@ public class ReportFragment extends Fragment {
 			builder.setNegativeButton("Cancel", new canceler());
 			AlertDialog ad = builder.create();
 			ad.show();
-
 		}
-
 	}
 
 	private class customTag implements OnEditorActionListener {
@@ -112,7 +109,7 @@ public class ReportFragment extends Fragment {
 
 		//inflate the view
 		View v = inflater.inflate(R.layout.report_generator, container, false);
-		ArrayList<Button> list = MainActivity.reportLoader.addButtonsToView("default", (LinearLayout) v.findViewById(R.id.report_list));
+		ArrayList<Button> list = MainActivity.networkFragmnet.loader.addButtonsToView("default", (LinearLayout) v.findViewById(R.id.report_list));
 		if(list == null){
 			Log.e("ReportFragment", "couldn not load default buttons");
 		}
@@ -132,9 +129,9 @@ public class ReportFragment extends Fragment {
 		Report r = new Report();
 		Location l = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		
-		r.put(r.key_tagtype, tag);
-		r.put(Report.key_lat, l.getLatitude());
-		r.put(Report.key_lon, l.getLongitude());
+		r.put(Report.key_tagtype, tag);
+		r.put(Report.key_lat, Float.valueOf((float) l.getLatitude()));
+		r.put(Report.key_lon, Float.valueOf((float) l.getLongitude()));
 		
 		return r;
 	}

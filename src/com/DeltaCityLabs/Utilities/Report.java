@@ -70,6 +70,26 @@ public class Report {
 		}
 		return 0;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder ret = new StringBuilder();
+		
+		String date = getString(key_time);
+		if(date != null){
+			ret.append(date + " ");
+		}
+		
+		for(int i = 0; i < tags.size(); i++){
+			if(tags.get(i).compareTo(key_time) != 0){
+				ret.append(tags.get(i) + "=" + data.get(i) + " ");
+			}
+		}
+		
+		ret.append("\n");
+		
+		return ret.toString();
+	}
 	// access====================================
 	
 	// manips------------------------------------
