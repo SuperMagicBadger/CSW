@@ -20,13 +20,14 @@
         android:text="Welcome to CitySweep!\nWhat would you like to report?" />
 
     <ScrollView
-        android:id="@+id/history_scroll_view"
+        android:id="@+id/report_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.59" >
 
         <LinearLayout
             android:id="@+id/report_list"
+            style="@style/BaredLayout"
             android:layout_width="match_parent"
             android:layout_height="254dp"
             android:divider="?android:dividerHorizontal"

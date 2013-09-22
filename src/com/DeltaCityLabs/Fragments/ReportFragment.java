@@ -32,7 +32,9 @@ public class ReportFragment extends Fragment {
 	// varblok--------------------------
 	private Report trackedReport;
 	private LocationManager lm;
+	private LinearLayout layout;
 	private AlertDialog.Builder builder;
+	public String buttonLayout = "default";
 	// varblok==========================
 	
 	// helper classes-----------------------------------------------------------
@@ -66,10 +68,6 @@ public class ReportFragment extends Fragment {
 		@Override
 		public void onClick(View v) {
 			trackedReport = generateReport(internalTag);
-
-			//set user data
-			if(MainActivity.cswPreferences.getBoolean(MainActivity.key_sendmetrics, false)){
-			}
 			
 			builder.setTitle(internalTag);
 			builder.setMessage("report a " + internalTag + "?");
@@ -109,20 +107,30 @@ public class ReportFragment extends Fragment {
 
 		//inflate the view
 		View v = inflater.inflate(R.layout.report_generator, container, false);
-		ArrayList<Button> list = MainActivity.networkFragmnet.loader.addButtonsToView("default", (LinearLayout) v.findViewById(R.id.report_list));
-		if(list == null){
-			Log.e("ReportFragment", "couldn not load default buttons");
-		}
-		
-		
+		layout = (LinearLayout) v.findViewById(R.id.report_list);
 		//assign listeners
 		EditText custom = (EditText) v.findViewById(R.id.button_custom);
 		custom.setOnEditorActionListener(new customTag());
+		
+		refresh();
+		return v;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+//		refresh();
+	}
+	
+	public void refresh(){
+		ArrayList<Button> list = MainActivity.networkFragmnet.loader.addButtonsToView(buttonLayout, layout);
+		if(list == null){
+			Log.e("ReportFragment", "couldn not load default buttons");
+			return;
+		}
 		for(Button btn : list){
 			btn.setOnClickListener(new clicker(btn));
 		}
-
-		return v;
 	}
 	
 	public Report generateReport(String tag){

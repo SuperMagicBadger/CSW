@@ -1,6 +1,6 @@
 package com.DeltaCityLabs.Fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -54,7 +54,7 @@ public class NetworkFragment extends Fragment{
 		// load the managers
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		loader = new ReportLoader();
-		loader.loadFromPreferences(prefs);
+		loader.loadFromPreferences(getActivity(), prefs);
 
 		manager = new ReportManager();
 		manager.load(getActivity());
