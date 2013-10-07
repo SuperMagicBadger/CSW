@@ -9,12 +9,13 @@
     <string name="str_custom">Custom</string>
     <string name="str_server_adress">citysweep.deltacitylabs.com</string>
     <string name="str_gunshots">Gunshots</string>
+
     <string-array name="tab_titles">
-        <item >Report</item>
-        
-        <item >History</item>
-        <item >Settings</item>
+        <item>Report</item>
+        <item>History</item>
+        <item>Settings</item>
     </string-array>
+
     <string name="history_file">historyfile</string>
     <string name="str_disclaimer">This app is not a substitute for emergency services.  If you are involved in an emergency, please dial 911.</string>
     <string name="str_dial">Dial 911</string>
@@ -24,5 +25,18 @@
     <string name="somethings_broken">Somethings Broken</string>
     <string name="settingsheader">Settings</string>
     <string name="str_networksettingsheader">Network Settings</string>
+    <string name="welcome_to_citysweep">Welcome to CitySweep!\\nWhat would you like to report?</string>
+    <string name="new_button_set">New Button Set</string>
+
+    <string-array name="str_report_button_list">
+        <item>Vandalism</item>
+        <item>Graffiti</item>
+        <item>Road Hazard</item>
+        <item>Something\'s Broken</item>
+        <item>Noise Disturbance</item>
+        <item>Gunshots</item>
+    </string-array>
+        <string name="str_done">Done</string>
+        <string name="str_new_button">New Button</string>
 
 </resources>

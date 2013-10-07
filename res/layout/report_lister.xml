@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <ScrollView
-        android:id="@+id/history_scroll_view"
+        android:id="@+id/report_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="245dp"
         android:layout_weight="0.42" >

@@ -9,16 +9,16 @@ package com.example.idonteven;
 
 public final class R {
     public static final class array {
-        public static final int str_report_button_list=0x7f040000;
-        public static final int tab_titles=0x7f040001;
+        public static final int str_report_button_list=0x7f080001;
+        public static final int tab_titles=0x7f080000;
     }
     public static final class attr {
     }
     public static final class bool {
-        public static final int bool_use_custom=0x7f050000;
-        public static final int ga_autoActivityTracking=0x7f050001;
-        public static final int ga_debug=0x7f050003;
-        public static final int ga_reportUncaughtExcetions=0x7f050002;
+        public static final int bool_use_custom=0x7f040000;
+        public static final int ga_autoActivityTracking=0x7f040001;
+        public static final int ga_debug=0x7f040003;
+        public static final int ga_reportUncaughtExcetions=0x7f040002;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -27,67 +27,69 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f070000;
-        public static final int activity_vertical_margin=0x7f070001;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f0b0002;
-        public static final int SettingsLayout=0x7f0b000d;
-        public static final int Space1=0x7f0b000e;
-        public static final int about=0x7f0b000f;
-        public static final int button_broken=0x7f0b0008;
-        public static final int button_custom=0x7f0b000b;
-        public static final int button_graphitti=0x7f0b0006;
-        public static final int button_gunshots=0x7f0b000a;
-        public static final int button_noise=0x7f0b0009;
-        public static final int button_pothole=0x7f0b0007;
-        public static final int button_vandal=0x7f0b0005;
-        public static final int clear=0x7f0b0013;
-        public static final int history_linear_layout=0x7f0b000c;
-        public static final int history_scroll_view=0x7f0b0003;
-        public static final int metriclist=0x7f0b0011;
+        public static final int LinearLayout1=0x7f0b0005;
+        public static final int SettingsScroller=0x7f0b000a;
+        public static final int Space1=0x7f0b000d;
+        public static final int about=0x7f0b000e;
+        public static final int button_custom=0x7f0b0008;
+        public static final int button_editor_layout=0x7f0b0001;
+        public static final int done_button=0x7f0b0003;
+        public static final int history_linear_layout=0x7f0b0009;
+        public static final int new_button_button=0x7f0b0002;
+        public static final int new_row_button=0x7f0b000c;
         public static final int pager=0x7f0b0000;
-        public static final int policy=0x7f0b0010;
-        public static final int report_layout=0x7f0b0004;
-        public static final int sendmetrics=0x7f0b0012;
-        public static final int textView1=0x7f0b0001;
+        public static final int policy=0x7f0b000f;
+        public static final int report_list=0x7f0b0007;
+        public static final int report_scroll_view=0x7f0b0006;
+        public static final int settings_list_layout=0x7f0b000b;
+        public static final int textView1=0x7f0b0004;
     }
     public static final class integer {
-        public static final int socket_address=0x7f080001;
-        public static final int tab_count=0x7f080000;
+        public static final int socket_address=0x7f070001;
+        public static final int tab_count=0x7f070000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int disclaimer=0x7f030001;
-        public static final int report_generator=0x7f030002;
-        public static final int report_lister=0x7f030003;
-        public static final int settings=0x7f030004;
+        public static final int button_editor=0x7f030001;
+        public static final int button_setters=0x7f030002;
+        public static final int disclaimer=0x7f030003;
+        public static final int report_generator=0x7f030004;
+        public static final int report_lister=0x7f030005;
+        public static final int settings=0x7f030006;
     }
     public static final class menu {
         public static final int thatonemenu=0x7f0a0000;
     }
     public static final class string {
-        public static final int action_settings=0x7f060002;
-        public static final int app_name=0x7f060001;
-        public static final int ga_trackingId=0x7f060000;
-        public static final int history_file=0x7f060009;
-        public static final int settingsheader=0x7f060010;
-        public static final int somethings_broken=0x7f06000f;
-        public static final int str_about=0x7f06000e;
-        public static final int str_custom=0x7f060006;
-        public static final int str_dial=0x7f06000b;
-        public static final int str_disclaimer=0x7f06000a;
-        public static final int str_graphitti=0x7f060004;
-        public static final int str_gunshots=0x7f060008;
-        public static final int str_networksettingsheader=0x7f060011;
-        public static final int str_noise=0x7f06000d;
-        public static final int str_pothole=0x7f060005;
-        public static final int str_privacy_message=0x7f06000c;
-        public static final int str_server_adress=0x7f060007;
-        public static final int str_vadal=0x7f060003;
+        public static final int action_settings=0x7f050002;
+        public static final int app_name=0x7f050001;
+        public static final int ga_trackingId=0x7f050000;
+        public static final int history_file=0x7f050009;
+        public static final int new_button_set=0x7f050013;
+        public static final int settingsheader=0x7f050010;
+        public static final int somethings_broken=0x7f05000f;
+        public static final int str_about=0x7f05000e;
+        public static final int str_custom=0x7f050006;
+        public static final int str_dial=0x7f05000b;
+        public static final int str_disclaimer=0x7f05000a;
+        public static final int str_done=0x7f050014;
+        public static final int str_graphitti=0x7f050004;
+        public static final int str_gunshots=0x7f050008;
+        public static final int str_networksettingsheader=0x7f050011;
+        public static final int str_new_button=0x7f050015;
+        public static final int str_noise=0x7f05000d;
+        public static final int str_pothole=0x7f050005;
+        public static final int str_privacy_message=0x7f05000c;
+        public static final int str_server_adress=0x7f050007;
+        public static final int str_vadal=0x7f050003;
+        public static final int welcome_to_citysweep=0x7f050012;
     }
     public static final class style {
         /** 
@@ -116,5 +118,7 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
+        public static final int BaredLayout=0x7f090003;
+        public static final int NoBatTheme=0x7f090002;
     }
 }

@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="com.DeltaCityLabs.Utilities.DataManager"></service>
+        <service android:name="com.DeltaCityLabs.CitySweep.NetworkService"></service>
+        <activity android:name="com.DeltaCityLabs.CitySweep.ButtonEditor"></activity>
     </application>
 
 </manifest>

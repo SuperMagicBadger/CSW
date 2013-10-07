@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="str_report_button_list">
-        <item >Vandalism</item>
-        <item >Graffiti</item>
-        <item>Road Hazard</item>
-        <item >Something\'s Broken</item>        
-        <item >Noise Disturbance</item>
-        <item >Gunshots</item>
-    </string-array>
     <item type="bool" name="bool_use_custom">true</item>
     
 </resources>
