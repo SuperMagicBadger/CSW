@@ -5,8 +5,12 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="android:Theme.Holo">
         <!-- API 14 theme customizations can go here. -->
+    </style>
+    <style parent="android:Theme.Holo.NoActionBar" name="NoBatTheme"></style>
+    <style name="BaredLayout">
+        <item name="android:showDividers">beginning|middle|end</item>
     </style>
 
 </resources>

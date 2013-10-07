@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/SettingsLayout"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SettingsScroller"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <Space
-        android:id="@+id/Space1"
+    <LinearLayout
+        android:id="@+id/settings_list_layout"
+        style="@style/BaredLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </Space>
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <Button
+            android:id="@+id/new_row_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/new_button_set" />
+
+        <Space
+            android:id="@+id/Space1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </Space>
+    </LinearLayout>
+
+</ScrollView>
